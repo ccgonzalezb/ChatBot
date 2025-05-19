@@ -1,0 +1,11 @@
+# Ignorar el ejecutable y carpetas de PyInstaller
+*.exe
+*.spec
+build/
+dist/
+__pycache__/
+*.pyc
+
+# Otros archivos temporales
+*.log
+.env
