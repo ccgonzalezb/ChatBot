@@ -3,7 +3,8 @@ from rapidfuzz import process
 import random
 
 #Mensajes de bienvenida y despedida
-print("Hola, soy un chatbot basado en reglas.")
+nombre = input("Hola, ¿Cómo te llamas? ")
+print(f"Muchos gusto, {nombre}. Soy un chatbot de memoria 😊")
 print("Escribe Salir para terminar la conversación.")
 
 #Diccionario con reglas
@@ -47,6 +48,7 @@ respuestas = {
 }
 
 frases_conocidas = list(respuestas.keys())
+preguntas_previas = set()
 # Función para encontrar la mejor coincidencia
 
 #Bucle de conversación
@@ -54,15 +56,20 @@ while True:
     user_input = input("Tú: ").lower().strip()# convertimos a minúsculas para facilitar la comparación
 
     if user_input == "salir":
-        print("Chatbot: Conversación finalizada.")
+        print(f"Chatbot: Conversación finalizada. ¡Nos vemos, {nombre}!")
         break
 
     # Buscamos la mejor coincidencia con fuzzy matching
     mejor_coincidencia, puntuacion, _ = process.extractOne(user_input, frases_conocidas)
 
     if puntuacion >= 80: #Puedes ajustar ese valor
-        respuesta = random.choice(respuestas[mejor_coincidencia])
-        print("Chatbot:", respuesta)
+        if mejor_coincidencia in preguntas_previas:
+            respuesta = random.choice(respuestas[mejor_coincidencia])
+            print("Chatbot: Ya me habías preguntado eso pero igual te respondo", respuesta)
+        else:
+            preguntas_previas.add(mejor_coincidencia)    
+            respuesta = random.choice(respuestas[mejor_coincidencia])
+            print("Chatbot:", respuesta)
     else:
         print("Chatbot: Lo siento, no entiendo esa pregunta.")
 # Fin del código
