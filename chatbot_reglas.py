@@ -1,4 +1,5 @@
 #Librerias
+from rapidfuzz import process
 import random
 
 #Mensajes de bienvenida y despedida
@@ -45,6 +46,9 @@ respuestas = {
     
 }
 
+frases_conocidas = list(respuestas.keys())
+# Función para encontrar la mejor coincidencia
+
 #Bucle de conversación
 while True:
     user_input = input("Tú: ").lower().strip()# convertimos a minúsculas para facilitar la comparación
@@ -52,8 +56,12 @@ while True:
     if user_input == "salir":
         print("Chatbot: Conversación finalizada.")
         break
-    elif user_input in respuestas:
-        respuesta = random.choice(respuestas[user_input])
+
+    # Buscamos la mejor coincidencia con fuzzy matching
+    mejor_coincidencia, puntuacion, _ = process.extractOne(user_input, frases_conocidas)
+
+    if puntuacion >= 80: #Puedes ajustar ese valor
+        respuesta = random.choice(respuestas[mejor_coincidencia])
         print("Chatbot:", respuesta)
     else:
         print("Chatbot: Lo siento, no entiendo esa pregunta.")
