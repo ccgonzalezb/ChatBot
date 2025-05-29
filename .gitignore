@@ -9,3 +9,6 @@ __pycache__/
 # Otros archivos temporales
 *.log
 .env
+chatbot_reglas.py
+comandos_api.txt
+Qué es un chatbot.txt

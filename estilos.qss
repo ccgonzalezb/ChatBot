@@ -1,0 +1,19 @@
+/* Fondo general */
+QWidget {
+    background-color: #f9f9f9;
+    font-family: Arial;
+    font-size: 20px;
+}
+
+/* Entrada de texto */
+QLineEdit {
+    background-color: white;
+    border: 2px solid #cccccc;
+    border-radius: 6px;
+    padding: 6px;
+    color: #333333;
+}
+
+QLineEdit:focus {
+    border: 2px solid #3498db;
+}
